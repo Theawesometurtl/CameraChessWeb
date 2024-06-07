@@ -94,6 +94,7 @@ const VideoAndSidebar = ({ mode }: { mode: Mode }) => {
         "",
         moves
       ].join("\r");
+      console.log(token, broadcastPgn, study.id)
       lichessPushRound(token, broadcastPgn, study.id);
     });
   }, [moves])

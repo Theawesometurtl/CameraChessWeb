@@ -48,6 +48,10 @@ const router = createBrowserRouter([
         element: <VideoAndSidebar mode="broadcast" />
       },
       {
+        path: "/image",
+        element: <VideoAndSidebar mode="image" />
+      },
+      {
         path: "/play",
         element: <VideoAndSidebar mode="play" />
       },

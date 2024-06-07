@@ -8,6 +8,8 @@ import { zeros } from "./math";
 import { CORNER_KEYS } from "./constants";
 import { Chess } from "chess.js";
 
+
+
 const calculateScore = (state: any, move: MovesData, from_thr=0.6, to_thr=0.6) => {
   let score = 0;
   move.from.forEach(square => {
@@ -228,6 +230,7 @@ movesPairsRef: any, lastMoveRef: any, moveTextRef: any, mode: Mode) => {
         const greedy = (mode === "play") ? false : hasGreedyMove;
         const payload = makeUpdatePayload(boardRef.current, greedy);
         console.log("payload", payload);
+        console.log("fen:", payload.fen)
         dispatch(gameUpdate(payload));
       }
       setText([`FPS: ${fps}`, moveTextRef.current]);
