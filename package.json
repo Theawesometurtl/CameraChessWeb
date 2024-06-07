@@ -1,16 +1,16 @@
 {
-"homepage": "https://theawesometurtl.github.io/CameraChessWeb/",
+  "homepage": "https://theawesometurtl.github.io/CameraChessWeb/",
   "name": "camera-chess",
   "description": "Camera Chess web app",
   "version": "1.0.0",
-  "type": "module", 
+  "type": "module",
   "scripts": {
     "start": "vite",
     "build": "tsc && eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "tsc": "tsc",
     "preview": "vite preview",
-    "deploy": "gh-pages -d docs"
+    "deploy": "gh-pages -d dist"
   },
   "license": "MIT",
   "dependencies": {
@@ -19,6 +19,7 @@
     "@popperjs/core": "^2.11.8",
     "@react-hook/window-size": "^3.1.1",
     "@reduxjs/toolkit": "^1.9.7",
+    "@tensorflow/tfjs": "^4.20.0",
     "@tensorflow/tfjs-backend-webgl": "^4.15.0",
     "@tensorflow/tfjs-converter": "^4.15.0",
     "@tensorflow/tfjs-core": "^4.15.0",
@@ -57,10 +58,12 @@
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
+    "express": "^4.19.2",
     "gh-pages": "^5.0.0",
+    "multer": "^1.4.5-lts.1",
     "source-map-loader": "^4.0.1",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.3.3",
+    "typescript": "^5.4.5",
     "vite": "^5.0.13",
     "vite-bundle-visualizer": "^1.0.0"
   }
