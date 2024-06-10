@@ -39,7 +39,7 @@ const Marker = ({ name, xy }: { name: CornersKey, xy: number[] }) => {
         "xy": [data.x, data.y],
         "key": name
       }
-      console.log(payload);
+      console.log(payload, "corners payload");
       dispatch(cornersSet(payload))
     }}
     >

@@ -140,6 +140,7 @@ const VideoAndSidebar = ({ mode }: { mode: Mode }) => {
       case "upload": return <UploadSidebar {...props} />
       case "play": return <PlaySidebar {...props} />
       case "broadcast": return <BroadcastSidebar {...props} />
+      case "image": return <BroadcastSidebar {...props} />
     }
   }
 

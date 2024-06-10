@@ -15,7 +15,6 @@ export default defineConfig({
       includeAssets: [
           "**/*",
       ],
-      manifest: false,
     })
   ],
   build: {

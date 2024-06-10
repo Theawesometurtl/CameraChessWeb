@@ -1,6 +1,6 @@
 import { findPieces } from "../../utils/findPieces";
 import { useEffect, useRef, useState } from "react";
-import { CORNER_KEYS, MARKER_DIAMETER, MARKER_RADIUS, MEDIA_ASPECT_RATIO, MEDIA_CONSTRAINTS } from "../../utils/constants";
+import { CORNER_KEYS, MARKER_DIAMETER, MARKER_RADIUS, MEDIA_ASPECT_RATIO } from "../../utils/constants";
 import { Corners } from ".";
 import { useWindowWidth, useWindowHeight } from '@react-hook/window-size';
 import { useDispatch } from 'react-redux';
@@ -19,6 +19,7 @@ const Video = ({ piecesModelRef, canvasRef, videoRef, sidebarRef, playing,
   setText: SetStringArray, digital: boolean, mode: Mode,
   cornersRef: any
 }) => {
+  
   const game: Game = gameSelect();
 
   const [boardWidth, setBoardWidth]: any = useState(100);
@@ -65,6 +66,22 @@ const Video = ({ piecesModelRef, canvasRef, videoRef, sidebarRef, playing,
     return `${nHalfMoves}...${firstMove} ${nHalfMoves + 1}.${secondMove}`
   }
 
+
+
+  const setupMonitorStream = async () => {
+    console.log("stream setup time")
+    const monitorUrl = 'http://192.168.1.77/zm/cgi-bin/nph-zms?mode=jpeg&monitor=1'; // Replace with your ZoneMinder monitor URL
+    const response = await fetch(monitorUrl);
+    const stream = await response.body;
+    return stream;
+  };
+  
+  const awaitSetupMonitorStream = async () => {
+    return setupMonitorStream();
+  };
+  
+
+/*
   const setupWebcam = async () => {
     const stream = await navigator.mediaDevices.getUserMedia(MEDIA_CONSTRAINTS);
     if (videoRef.current !== null) {
@@ -76,7 +93,7 @@ const Video = ({ piecesModelRef, canvasRef, videoRef, sidebarRef, playing,
   const awaitSetupWebcam = async () => {
     return setupWebcam();
   }
-
+*/
   const updateWidthHeight = () => {
     let height = ((windowWidth - sidebarRef.current.offsetWidth - MARKER_DIAMETER) 
     / MEDIA_ASPECT_RATIO) + MARKER_DIAMETER;
@@ -119,7 +136,7 @@ const Video = ({ piecesModelRef, canvasRef, videoRef, sidebarRef, playing,
 
     let streamPromise: any = null;
     if (mode !== "upload") {
-      streamPromise = awaitSetupWebcam()
+      streamPromise = awaitSetupMonitorStream()
     }
 
     findPieces(piecesModelRef, videoRef, canvasRef, playingRef, setText, dispatch, 
@@ -185,6 +202,7 @@ const Video = ({ piecesModelRef, canvasRef, videoRef, sidebarRef, playing,
       return;
     }
     window.setTimeout(() => {
+    
       if (!(videoRef.current)) {
         return;
       }
@@ -195,7 +213,7 @@ const Video = ({ piecesModelRef, canvasRef, videoRef, sidebarRef, playing,
       }
 
       const capabilities = tracks[0].getCapabilities();
-      console.log("Capabilties", capabilities);
+      console.log("Capabilties", capabilities, videoRef);
 
       if (capabilities.zoom) {
         tracks[0].applyConstraints({
